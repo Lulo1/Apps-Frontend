@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encriptador de Texto</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .input-area {
+      margin-bottom: 10px;
+    }
+    .btn {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .output-area {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      background-color: #333333;
+      color: #ffffff;
+      resize: none;
+    }
+    h1 {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Encriptador de Texto</h1>
+    <div class="input-area">
+      <label for="text">Texto:</label><br>
+      <textarea id="text" rows="4" cols="50"></textarea>
+    </div>
+    <button class="btn" onclick="encrypt()">Encriptar</button>
+    <button class="btn" onclick="decrypt()">Desencriptar</button>
+    <button class="btn" onclick="copyText()">Copiar Texto</button>
+    <div class="output-area">
+      <label for="result">Resultado:</label><br>
+      <textarea id="result" rows="4" cols="50" readonly></textarea>
+    </div>
+  </div>
+
+  <script>
+    // Función para encriptar el texto
+    function encrypt() {
+      var text = document.getElementById("text").value;
+      // Implementa tu lógica de encriptación aquí
+
+      // Ejemplo de encriptación simple usando rot13
+      var result = "";
+      for (var i = 0; i < text.length; i++) {
+        var charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          result += String.fromCharCode(((charCode - 65 + 13) % 26) + 65);
+        } else if (charCode >= 97 && charCode <= 122) {
+          result += String.fromCharCode(((charCode - 97 + 13) % 26) + 97);
+        } else {
+          result += text.charAt(i);
+        }
+      }
+
+      document.getElementById("result").value = result;
+    }
+
+    // Función para desencriptar el texto
+    function decrypt() {
+      var text = document.getElementById("text").value;
+      // Implementa tu lógica de desencriptación aquí
+      // Debe ser el inverso del algoritmo de encriptación utilizado
+
+      // Ejemplo de desencriptación simple usando rot13
+      var result = "";
+      for (var i = 0; i < text.length; i++) {
+        var charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          result += String.fromCharCode(((charCode - 65 + 13) % 26) + 65);
+        } else if (charCode >= 97 && charCode <= 122) {
+          result += String.fromCharCode(((charCode - 97 + 13) % 26) + 97);
+        } else {
+          result += text.charAt(i);
+        }
+      }
+
+      document.getElementById("result").value = result;
+    }
+
+    // Función para copiar el texto encriptado al portapapeles
+    function copyText() {
+      var result = document.getElementById("result");
+      result.select();
+      result.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Texto copiado al portapapeles");
+    }
+  </script>
+</body>
+</html>
